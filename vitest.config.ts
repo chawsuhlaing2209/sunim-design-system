@@ -7,6 +7,8 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
     passWithNoTests: true,
+    // Registers @testing-library/jest-dom's matchers on vitest's expect.
+    setupFiles: ['./src/test/setup.ts'],
     exclude: ['examples/**', 'node_modules/**', 'dist/**', 'storybook-static/**'],
   },
 });

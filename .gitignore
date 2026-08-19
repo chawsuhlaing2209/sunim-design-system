@@ -6,3 +6,6 @@ dist/
 .crew/
 *.log
 .DS_Store
+
+# Parity screenshots produced by `npm run screenshots`
+.screenshots/
