@@ -1,0 +1,13 @@
+<!--
+  The type tokens name three families (--type-font-display: Schibsted Grotesk,
+  --type-font-body: Instrument Sans, --type-font-hand: Caveat) but nothing was
+  loading them, so every component fell back to a system font. That silently
+  breaks measured parity against Figma: auto line-height differs per typeface,
+  which made the Button render 1px shorter than its design.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&family=Instrument+Sans:wght@400;500;600;700&family=Caveat:wght@400;700&display=swap"
+  rel="stylesheet"
+/>
