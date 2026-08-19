@@ -4,13 +4,6 @@
 > contract, not just the file.
 > Version: `0.0.0` · Last built: `—`
 
-> **⚠️ `tokens/tokens.json` does not exist yet.** Setup moved the plugin's demo export to
-> `tokens.sample.json` so it cannot be mistaken for Sunim's. Export the variables from the Sunim
-> tokens file (`AIVTmPw3TX0F53NaD9wHP9`) with the Figma community plugin **Design Tokens**
-> (`org.lukasoppermann.figmaDesignTokens`) and commit the result as `tokens/tokens.json`.
-> `npm run tokens:build` fails until you do — that failure is the gate working, not a bug.
-> Delete `tokens.sample.json` once your own export lands.
-
 ## Files
 - `tokens/tokens.json` — **the source**, exported from Figma and committed here. Tiered Base +
   Semantic. Always this exact path and name. Hand-edit it and the next export overwrites you.
