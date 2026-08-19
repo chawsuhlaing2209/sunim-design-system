@@ -105,7 +105,7 @@
     "enabled": true,
     "provider": "command",
     "$providerNote": "Only two values: github-pages = the bundled .github/workflows/pages.yml builds and publishes on push. command = you publish, via stagingCommand/productionCommand below. A host name is NOT a value \u2014 Vercel, Netlify, Cloudflare and the rest are all 'command' plus their CLI. The contract for a command is exactly one thing: print the deployed URL as the LAST line of stdout. The Engineer captures that line, verifies it answers 200, and reports it. Absent = github-pages.",
-    "stagingCommand": "npm run build-storybook && npx vercel deploy storybook-static --yes",
-    "productionCommand": "npm run build-storybook && npx vercel deploy storybook-static --prod --yes"
+    "stagingCommand": "npm run tokens:build && npm run build-storybook && npx vercel deploy storybook-static --yes",
+    "productionCommand": "npm run tokens:build && npm run build-storybook && npx vercel deploy storybook-static --prod --yes"
   }
 }

@@ -11,7 +11,7 @@
     "screenshots": "test-storybook --url http://127.0.0.1:6006",
     "test": "vitest run",
     "test-storybook": "test-storybook",
-    "tokens:build": "style-dictionary build",
+    "tokens:build": "style-dictionary build --config style-dictionary.config.js",
     "tokens:check": "node \"$CLAUDE_PLUGIN_ROOT/scripts/token-check.js\"",
     "typecheck": "tsc --noEmit"
   },
