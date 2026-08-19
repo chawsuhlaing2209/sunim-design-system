@@ -1,0 +1,111 @@
+{
+  "$comment": [
+    "Names and ids only, never a secret. The crew addresses Airtable by NAME and",
+    "resolves each name to your base's ids at startup, so a duplicated base needs",
+    "only a new airtable.baseId. Change a name only if your base renames the field."
+  ],
+  "board": {
+    "$note": "Who holds the board. airtable = the real base, credentials from ~/.claude/productive-crew/credentials.json or the AIRTABLE_API_KEY environment variable (never a file in the repo). file = .crew/board.json, for running the crew with no account at all \u2014 fixtures, tests, a first component before a base exists. It is a different board, not a cache of one: a cached copy would go stale and still look live.",
+    "provider": "airtable"
+  },
+  "airtable": {
+    "$comment": "Table and column names are Title Case, matching the base exactly. Airtable resolves table names case-sensitively.",
+    "baseId": "appZaeKPj6g6ls6MO",
+    "tables": {
+      "components": "Components",
+      "stagingTesting": "Staging Testing"
+    },
+    "fields": {
+      "components": {
+        "name": "Components",
+        "figma": "Figma",
+        "design": "Design",
+        "commit": "Commit",
+        "staging": "Staging Storybook",
+        "production": "Production Storybook",
+        "astro": "Astro Link",
+        "status": "Development",
+        "stagingTests": "[Staging] Test Records"
+      },
+      "stagingTesting": {
+        "case": "Component/Sub Component",
+        "result": "Testing Results",
+        "expected": "Expected Results",
+        "screenshot": "Attachment",
+        "suggestion": "Suggestion for Improvement",
+        "component": "Composed In",
+        "variants": "Variants",
+        "size": "Size",
+        "state": "State",
+        "context": "Context"
+      }
+    },
+    "choices": {
+      "$comment": "Cell VALUES, not column names. The Development formula and scripts/status.js both match the re-test result on the substring \"re-test\" rather than the whole label, so renaming that option does not silently break the ladder.",
+      "result": [
+        "Passed",
+        "Failed",
+        "Fixed (To re-test)"
+      ]
+    }
+  },
+  "asana": {
+    "workspaceId": "0000000000000000",
+    "projectId": "0000000000000000",
+    "agents": {
+      "engineer": "",
+      "qa": "",
+      "devops": "",
+      "pm": ""
+    }
+  },
+  "figma": {
+    "$note": "Only tokens is required. One Figma file? set tokens, leave components blank. Components are read per-row from Airtable, so add component files only if you want them named here.",
+    "files": {
+      "tokens": "AIVTmPw3TX0F53NaD9wHP9",
+      "components": "mFnN1Sr8MAmOdmx0ABXPsb"
+    }
+  },
+  "stack": {
+    "$note": "Set at /productive-crew:setup. Decides the component code AND the token output. Regenerates tools.md.",
+    "framework": "react",
+    "language": "typescript"
+  },
+  "tokens": {
+    "buildTool": "style-dictionary",
+    "platforms": [
+      "css",
+      "ts"
+    ]
+  },
+  "repo": {
+    "$note": "Branch names are yours. Defaults below. If your repo already uses develop/master or another flow, /productive-crew:setup detects it and maps the three tiers (work \u2192 preview \u2192 production) to your branches. If you rename these, also update the branch refs in .github/workflows/pages.yml.",
+    "slug": "chawsuhlaing2209/sunim-design-system",
+    "componentPrefix": "component/",
+    "stagingBranch": "staging",
+    "mainBranch": "main",
+    "stagingUrl": "",
+    "productionUrl": ""
+  },
+  "tokenBuilder": {
+    "$note": "The build runs when tokens/tokens.json changes. The schedule is a safety net for when a change lands without triggering a run \u2014 not the primary trigger.",
+    "schedule": "weekly"
+  },
+  "pm": {
+    "schedule": "daily"
+  },
+  "schedule": {
+    "$note": "What you INTENDED to run on a clock, in hours. The plugin cannot schedule anything \u2014 it ships hooks, which fire on events, not on the clock \u2014 so the job itself lives outside (a Claude Code scheduled task, launchd, cron, CI). Declaring it here is what lets the crew notice when it stops happening: scripts/run-log.js compares this against .crew/runs/<kind>.jsonl and the session-start hook says so out loud. Remove a key to stop checking it \u2014 an undeclared cadence is never warned about.",
+    "sweep": {
+      "everyHours": 24
+    }
+  },
+  "deploy": {
+    "$note": "enabled=false is NOT WIRED YET: no staging link, so no QA stage and no Staging Testing rows. provider decides WHO publishes the staging build \u2014 the crew only needs a URL it can verify, and it does not care who produced it.",
+    "enabled": true,
+    "provider": "command",
+    "$providerNote": "Only two values: github-pages = the bundled .github/workflows/pages.yml builds and publishes on push. command = you publish, via stagingCommand/productionCommand below. A host name is NOT a value \u2014 Vercel, Netlify, Cloudflare and the rest are all 'command' plus their CLI. The contract for a command is exactly one thing: print the deployed URL as the LAST line of stdout. The Engineer captures that line, verifies it answers 200, and reports it. Absent = github-pages.",
+    "stagingCommand": "npm run build-storybook && npx vercel deploy storybook-static --yes",
+    "productionCommand": "npm run build-storybook && npx vercel deploy storybook-static --prod --yes"
+  }
+}
