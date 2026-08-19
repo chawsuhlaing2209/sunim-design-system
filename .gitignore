@@ -9,3 +9,5 @@ dist/
 
 # Parity screenshots produced by `npm run screenshots`
 .screenshots/
+docs/dist/
+docs/.astro/

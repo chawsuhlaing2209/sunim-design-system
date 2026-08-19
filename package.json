@@ -16,6 +16,7 @@
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
+    "@astrojs/starlight": "^0.41.7",
     "@storybook/addon-a11y": "^8.0.0",
     "@storybook/addon-essentials": "^8.0.0",
     "@storybook/react-vite": "^8.0.0",
@@ -23,6 +24,7 @@
     "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.0.0",
     "@testing-library/user-event": "^14.5.2",
+    "astro": "^7.2.3",
     "jsdom": "^27.0.1",
     "playwright": "^1.47.0",
     "style-dictionary": "^4.3.0",
